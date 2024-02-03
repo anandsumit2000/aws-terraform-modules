@@ -1,0 +1,20 @@
+name: Terraform-FMT-Verify
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  verify:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Terraform format
+        run: terraform fmt -check -recursive

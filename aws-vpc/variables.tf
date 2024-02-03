@@ -1,17 +1,17 @@
 variable "environment" {
-  type = "string"
+  type = string
 }
 
 variable "region" {
-  
+
 }
 
 variable "vpc_cidr" {
-  
+
 }
 
 variable "subnet_cidr" {
-  
+
 }
 
 variable "availability_zone" {
