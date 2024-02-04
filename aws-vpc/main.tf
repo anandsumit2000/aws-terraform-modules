@@ -33,6 +33,14 @@ resource "aws_subnet" "public" {
   }
 }
 
+resource "aws_eip" "nat_eip" {
+  domain     = ["vpc"]
+  depends_on = [aws_nat_gateway.nat]
+  tags = {
+    Name = "${var.environment}-nat-gatway-eip"
+  }
+}
+
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
   tags = {
@@ -40,3 +48,10 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
+resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.nat_eip
+  subnet_id     = aws_subnet.public
+  tags = {
+    Name = "${var.environment}-nat-gateway"
+  }
+}
